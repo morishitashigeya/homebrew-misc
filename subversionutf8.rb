@@ -143,7 +143,7 @@ class Subversion < Formula
         EOS
       end
     end
-:
+
     ENV.universal_binary if build.universal?
 
     # Use existing system zlib
