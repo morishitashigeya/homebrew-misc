@@ -73,6 +73,13 @@ class Subversionutf8 < Formula
     end
   end
 
+  # Patch for Subversion handling of OS X UTF-8-MAC filename.
+  if build.with? "unicode-path"
+    patch :p0 do
+      url "https://raw.githubusercontent.com/TakuyaOkada/homebrew-misc/master/svn_1.8.x_darwin_unicode_precomp.patch"
+    end
+  end
+
   def install
     # OS X's Python is built universally and can't link with Homebrew's deps
     # unless Homebrew's deps are universal as well.
@@ -109,13 +116,6 @@ class Subversionutf8 < Formula
 
       scons *args
       scons "install"
-    end
-
-    # Patch for Subversion handling of OS X UTF-8-MAC filename.
-    if build.with? "unicode-path"
-      patch :p0 do
-        url "https://raw.githubusercontent.com/TakuyaOkada/homebrew-misc/master/svn_1.8.x_darwin_unicode_precomp.patch"
-      end
     end
 
 #    if build.include? "unicode-path"
